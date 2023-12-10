@@ -2,15 +2,11 @@ import React from "react";
 
 function About() {
     return (
-        <div className="mt-20 px-20" id="about">
-            <div className="flex flex-col items-center justify-center mt-20">
-                <p className="text-center ">#WhatIsEITENA??</p>
+        <div className="my-20 px-20" id="about">
+            <div className="flex flex-col items-center justify-center mt-40">
+                <p className="">#WhatIsEITENA??</p>
                 <p className="font-bold text-2xl">
-                    <span className="text-indigo-500">EITENA</span> adalah perusahaan yang berfokus pada
-                </p>
-                <p className="font-bold text-xl">
-                    Pengembangan Hardskill dan Softskill yang dibutuhkan untuk
-                    mencapai impianmu.
+                    <span className="text-indigo-500">EITENA</span> adalah perusahaan yang berfokus pada Pengembangan Hardskill dan Softskill.
                 </p>
             </div>
             <div className="grid my-20 grid-cols-1 text-center gap-10 md:grid-cols-2 xl:grid-cols-4">
@@ -60,7 +56,8 @@ function About() {
                     </p>
                 </div>
             </div>
-            <p className="text-center">#LearnWithUs</p>
+            <div className="mt-60">
+            <p className="text-center ">#LearnWithUs</p>
             <h2
                 className="font-bold text-4xl text-center mb-20"
                 id="trainer"
@@ -70,13 +67,14 @@ function About() {
                     Trainer
                 </span>
             </h2>
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4 text-center">
+            <div className=" grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4 text-center">
                 <div className="col-span-1">
                     <img
-                        src="/assets/Profile.jpg"
-                        className="w-56 m-auto mb-5 rounded-full"
+                        src="/assets/1.jpeg"
+                        className="w-full m-auto mb-5 rounded hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-500"
                         alt=""
                     />
+                    <h2 className="font-bold">Abraham Lington</h2>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Autem, voluptate.
@@ -84,10 +82,11 @@ function About() {
                 </div>
                 <div className="col-span-1">
                     <img
-                        src="/assets/Profile.jpg"
-                        className="w-56 m-auto mb-5 rounded-full"
+                        src="/assets/2.jpeg"
+                        className="w-full m-auto mb-5 rounded hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-500"
                         alt=""
                     />
+                    <h2 className="font-bold">Ragil Setiawan</h2>
                     <p>
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Quas, cumque.
@@ -95,10 +94,11 @@ function About() {
                 </div>
                 <div className="col-span-1">
                     <img
-                        src="/assets/Profile.jpg"
-                        className="w-56 m-auto mb-5 rounded-full"
+                        src="/assets/3.jpeg"
+                        className="w-full m-auto mb-5 rounded hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-500"
                         alt=""
                     />
+                    <h2 className="font-bold">Budi harman</h2>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Beatae, consequatur!
@@ -106,15 +106,17 @@ function About() {
                 </div>
                 <div className="col-span-1">
                     <img
-                        src="/assets/Profile.jpg"
-                        className="w-56 m-auto mb-5 rounded-full"
+                        src="/assets/4.jpeg"
+                        className="w-full m-auto mb-5 rounded hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-500"
                         alt=""
                     />
+                    <h2 className="font-bold">Ucok kurniawan</h2>
                     <p>
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Quas, soluta.
                     </p>
                 </div>
+            </div>
             </div>
         </div>
     );

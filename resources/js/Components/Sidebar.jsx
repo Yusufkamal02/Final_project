@@ -1,7 +1,10 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+
 
 export default function Sidebar() {
+    const [enter, setEnter] = useState(false);
 
     const [enter, setEnter] = useState(false);
 
@@ -14,6 +17,19 @@ export default function Sidebar() {
             <div className="logo-details">
                 <i className="bx bxl-c-plus-plus icon"></i>
                 <Link href='/'>
+    const toggleEnter = () => {
+        setEnter((previousState) => !previousState);
+    };
+
+    return (
+        <div
+            className={
+                "sidebar " + (enter ? "open bx-menu-alt-right" : "bx-menu")
+            }
+        >
+            <div className="logo-details">
+                <i className="bx bxl-c-plus-plus icon"></i>
+                <Link href="/">
                     <div className="logo_name">Eitena</div>
                 </Link>
                 <i className="bx bx-menu" id="btn" onClick={toggleEnter}></i>
@@ -24,6 +40,7 @@ export default function Sidebar() {
                     <input type="text" placeholder="Search..." />
                     <span className="tooltip">Search</span>
                 </li>
+
                 <li>
                     <Link href='/dashboard'>
                         <i className="bx bx-grid-alt"></i>
@@ -37,13 +54,21 @@ export default function Sidebar() {
                         <span className="links_name">User</span>
                         <span className="tooltip">User</span>
                     </Link>
+                <Router>
+                <li id="profile">
+                    <Link to="/profile">
+                        <i className="bx bx-user"></i>
+                        <span className="links_name">My Profile</span>
+                    </Link>
+                    <span className="tooltip">My Profile</span>
                 </li>
+                </Router>
                 <li>
                     <a href="#">
-                        <i className="bx bx-chat"></i>
-                        <span className="links_name">Messages</span>
+                        <i className="bx bx-book"></i>
+                        <span className="links_name">My Course</span>
                     </a>
-                    <span className="tooltip">Messages</span>
+                    <span className="tooltip">My Course</span>
                 </li>
                 <li>
                     <Link href='/master/catalog'>
@@ -51,34 +76,39 @@ export default function Sidebar() {
                         <span className="links_name">Catalog</span>
                         <span className="tooltip">Catalog</span>
                     </Link>
-                </li>
-                <li>
                     <a href="#">
-                        <i className="bx bx-folder"></i>
-                        <span className="links_name">File Manager</span>
+                        <i className="bx bx-loader"></i>
+                        <span className="links_name">Learning Progress</span>
                     </a>
-                    <span className="tooltip">Files</span>
+                    <span className="tooltip">Learning Progress</span>
                 </li>
                 <li>
                     <a href="#">
                         <i className="bx bx-cart-alt"></i>
-                        <span className="links_name">Order</span>
+                        <span className="links_name">Transactions</span>
                     </a>
-                    <span className="tooltip">Order</span>
+                    <span className="tooltip">Transactions</span>
                 </li>
                 <li>
                     <a href="#">
-                        <i className="bx bx-heart"></i>
-                        <span className="links_name">Saved</span>
+                        <i className="bx bx-chat"></i>
+                        <span className="links_name">Feed</span>
                     </a>
-                    <span className="tooltip">Saved</span>
+                    <span className="tooltip">Feed</span>
                 </li>
                 <li>
                     <a href="#">
                         <i className="bx bx-cog"></i>
-                        <span className="links_name">Setting</span>
+                        <span className="links_name">Autentications</span>
                     </a>
-                    <span className="tooltip">Setting</span>
+                    <span className="tooltip">Autentications</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i className="bx bx-help-circle"></i>
+                        <span className="links_name">Help</span>
+                    </a>
+                    <span className="tooltip">Help</span>
                 </li>
                 <li className="profile">
                     <div className="profile-details">
@@ -87,8 +117,8 @@ export default function Sidebar() {
                             alt="profileImg"
                         />
                         <div className="name_job">
-                            <div className="name">Stella Army</div>
-                            <div className="job">Web designer</div>
+                            <div className="name">Eitena Groups</div>
+                            <div className="job">Education</div>
                         </div>
                     </div>
                     <i className="bx bx-log-out" id="log_out"></i>
