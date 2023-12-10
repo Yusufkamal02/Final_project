@@ -3,21 +3,21 @@ import React, { useState } from "react";
 
 export default function Sidebar() {
 
-  const [enter, setEnter] = useState(false);
-  
-  const toggleEnter = () => {
-    setEnter((previousState) => !previousState);
-  };
+    const [enter, setEnter] = useState(false);
 
-  return (
-        <div className={'sidebar ' + ( enter ? 'open bx-menu-alt-right' : 'bx-menu')}>
-              <div className="logo-details">
-                  <i className="bx bxl-c-plus-plus icon"></i>
-            <Link href='/'>
-                  <div className="logo_name">Eitena</div>
-            </Link>
-                  <i className="bx bx-menu" id="btn" onClick={toggleEnter}></i>
-              </div>
+    const toggleEnter = () => {
+        setEnter((previousState) => !previousState);
+    };
+
+    return (
+        <div className={'sidebar ' + (enter ? 'open bx-menu-alt-right' : 'bx-menu')}>
+            <div className="logo-details">
+                <i className="bx bxl-c-plus-plus icon"></i>
+                <Link href='/'>
+                    <div className="logo_name">Eitena</div>
+                </Link>
+                <i className="bx bx-menu" id="btn" onClick={toggleEnter}></i>
+            </div>
             <ul className="nav-list">
                 <li>
                     <i className="bx bx-search"></i>
@@ -25,18 +25,18 @@ export default function Sidebar() {
                     <span className="tooltip">Search</span>
                 </li>
                 <li>
-                    <a href="#">
+                    <Link href='/dashboard'>
                         <i className="bx bx-grid-alt"></i>
                         <span className="links_name">Dashboard</span>
-                    </a>
-                    <span className="tooltip">Dashboard</span>
+                        <span className="tooltip">Dashboard</span>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#">
+                    <Link href='/master/users'>
                         <i className="bx bx-user"></i>
                         <span className="links_name">User</span>
-                    </a>
-                    <span className="tooltip">User</span>
+                        <span className="tooltip">User</span>
+                    </Link>
                 </li>
                 <li>
                     <a href="#">
@@ -46,11 +46,11 @@ export default function Sidebar() {
                     <span className="tooltip">Messages</span>
                 </li>
                 <li>
-                    <a href="#">
-                        <i className="bx bx-pie-chart-alt-2"></i>
-                        <span className="links_name">Analytics</span>
-                    </a>
-                    <span className="tooltip">Analytics</span>
+                    <Link href='/master/catalog'>
+                        <i className="bx bx-folder"></i>
+                        <span className="links_name">Catalog</span>
+                        <span className="tooltip">Catalog</span>
+                    </Link>
                 </li>
                 <li>
                     <a href="#">

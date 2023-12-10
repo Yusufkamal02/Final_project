@@ -12,16 +12,22 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
+        'city',
+        'address',
         'email',
+        'phonenumber',
+        'birthday',
+        'organization',
+        'role',
+        'departemen',
+        'postalcode',
+        'role_id',
         'password',
-        'username',
+        'about',
+        'institution'
     ];
 
     /**
@@ -43,4 +49,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function socialMedia()
+    {
+        return $this->hasOne(SocialMedia::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

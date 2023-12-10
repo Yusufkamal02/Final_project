@@ -68,7 +68,7 @@ function Navbar({ user, className }) {
                     <a href="#course">Kelas</a>
                     <a href="#footer">Contact</a>
                 </div>
-                
+
                 <div className="sm:top-0 sm:right-0 p-6 flex items-center">
                     {user ? (
                         <Dropdown>
@@ -96,7 +96,7 @@ function Navbar({ user, className }) {
                                 </span>
                             </Dropdown.Trigger>
                             <Dropdown.Content>
-                                <Dropdown.Link href={route("profile.edit")}>
+                                <Dropdown.Link href={route("users.index")}>
                                     My Profile
                                 </Dropdown.Link>
                                 <Dropdown.Link href={route("dashboard")}>
