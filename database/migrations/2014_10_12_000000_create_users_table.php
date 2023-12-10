@@ -6,25 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('city');
+            $table->string('address');
             $table->string('email')->unique();
-            $table->string('role')->default(0);
-            $table->string('is_lecturer')->default(0);
-            $table->string('picture')->nullable();
-            $table->integer('goals_of_career')->nullable();
-            $table->string('institution')->nullable();
-            $table->string('nationality')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('city')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('phonenumber');
+            $table->date('birthday');
+            $table->string('organization');
+            $table->unsignedBigInteger('role_id'); // Menggunakan unsignedBigInteger
+            $table->foreign('role_id')->references('id')->on('roles'); // Menambahkan foreign key constraint
+            $table->text('about')->nullable();
+            $table->text('institution');
+            $table->string('departemen');
+            $table->string('postalcode');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

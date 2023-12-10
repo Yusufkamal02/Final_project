@@ -6,6 +6,17 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 export default function Sidebar() {
     const [enter, setEnter] = useState(false);
 
+    const [enter, setEnter] = useState(false);
+
+    const toggleEnter = () => {
+        setEnter((previousState) => !previousState);
+    };
+
+    return (
+        <div className={'sidebar ' + (enter ? 'open bx-menu-alt-right' : 'bx-menu')}>
+            <div className="logo-details">
+                <i className="bx bxl-c-plus-plus icon"></i>
+                <Link href='/'>
     const toggleEnter = () => {
         setEnter((previousState) => !previousState);
     };
@@ -29,6 +40,20 @@ export default function Sidebar() {
                     <input type="text" placeholder="Search..." />
                     <span className="tooltip">Search</span>
                 </li>
+
+                <li>
+                    <Link href='/dashboard'>
+                        <i className="bx bx-grid-alt"></i>
+                        <span className="links_name">Dashboard</span>
+                        <span className="tooltip">Dashboard</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/master/users'>
+                        <i className="bx bx-user"></i>
+                        <span className="links_name">User</span>
+                        <span className="tooltip">User</span>
+                    </Link>
                 <Router>
                 <li id="profile">
                     <Link to="/profile">
@@ -46,6 +71,11 @@ export default function Sidebar() {
                     <span className="tooltip">My Course</span>
                 </li>
                 <li>
+                    <Link href='/master/catalog'>
+                        <i className="bx bx-folder"></i>
+                        <span className="links_name">Catalog</span>
+                        <span className="tooltip">Catalog</span>
+                    </Link>
                     <a href="#">
                         <i className="bx bx-loader"></i>
                         <span className="links_name">Learning Progress</span>
