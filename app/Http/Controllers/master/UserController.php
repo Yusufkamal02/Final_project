@@ -10,14 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
-
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::with('role')->get();
 
-        // Get currently authenticated user
         $turu = Auth::user();
 
         return inertia('Profile/Index', ['users' => $users, 'turu' => $turu]);
@@ -40,34 +38,8 @@ class UserController extends Controller
 
         User::create($request->all());
 
-        // just testing
-        // return dd($request->all());
-
         return Inertia::location(route('users.index'));
     }
-
-    // public function edit(User $user)
-    // {
-    //     $roles = Role::all();
-    //     return inertia('Profile/Custom/Edit', ['user' => $user, 'roles' => $roles]);
-    // }
-
-    // public function update(Request $request, User $user)
-    // {
-    //     $request->validate($this->validationRules($user->id));
-
-    //     // just testing
-    //     // return dd($request->all());
-
-    //     $user->update($request->all());
-
-    //     return Inertia::location(route('users.index'));
-
-    //     // Masih Burique code ini
-    //     // return Inertia::location(route('users.index', [
-    //     //     'success' => 'User updated successfully!'
-    //     // ]));
-    // }
 
     public function edit()
     {
@@ -77,39 +49,11 @@ class UserController extends Controller
         return Inertia::render('Profile/Custom/Edit', ['user' => $user, 'roles' => $roles]);
     }
 
-    // public function update(Request $request, User $user)
-    // {
-    // $request->validate($this->validationRules($user->id));
-
-    // // just testing
-    // // return dd($request->all());
-
-    // $user->update($request->all());
-
-    // return Inertia::location(route('users.index'));
-
-    // // Masih Burique code ini
-    // // return Inertia::location(route('users.index', [
-    // //     'success' => 'User updated successfully!'
-    // // ]));
-    // }
-
     public function update(Request $request)
     {
-        // return dd($request->all());
         $user = Auth::user();
 
-        // Validasi data yang diterima dari formulir jika diperlukan
-        // request()->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|email|unique:users,email,' . $user->id,
-        //     // tambahkan validasi lainnya sesuai kebutuhan
-        // ]);
-
-        // Update data profil pengguna
         $user->update(request()->all());
-        // return dd($request->all());
-        // Redirect ke halaman profil atau halaman lainnya setelah berhasil update
         return Inertia::location(route('users.index'));
     }
 
