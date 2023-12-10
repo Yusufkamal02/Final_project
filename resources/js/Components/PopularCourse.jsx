@@ -5,7 +5,7 @@ function PopularCourse() {
             <p className="text-center">#StayCurious</p>
             <h2 className="text-4xl font-bold text-center">Popular <span className="text-indigo-500">Courses</span></h2>
             <div className="flex flex-wrap justify-center lg:justify-between gap-4 mx-20 mt-16">
-                <div className="w-full md:w-[48%] lg:w-[32%] border-2 pb-6 hover:-translate-y-5 hover:shadow-xl transition duration-700">
+                <div className="w-full md:w-[48%] lg:w-[32%] border-2 pb-6 hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-300">
                     <img
                         src="/assets/portfolio1.png"
                         className="shadow-lg"
@@ -54,7 +54,7 @@ function PopularCourse() {
                         tempora! adipisicing elit. Doloribus consequatur tenetur
                     </p>
                 </div>
-                <div className="w-full md:w-[48%] lg:w-[32%] border-2 pb-6 hover:-translate-y-5 hover:shadow-xl transition duration-700">
+                <div className="w-full md:w-[48%] lg:w-[32%] border-2 pb-6 hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-300">
                     <img
                         src="/assets/portfolio1.png"
                         className="shadow-lg"
@@ -103,7 +103,7 @@ function PopularCourse() {
                         tempora! adipisicing elit. Doloribus consequatur tenetur
                     </p>
                 </div>
-                <div className="w-full md:w-[48%] lg:w-[32%] border-2 pb-6 hover:-translate-y-5 hover:shadow-xl transition duration-700">
+                <div className="w-full md:w-[48%] lg:w-[32%] border-2 pb-6 hover:-translate-y-4 transition duration-700 hover:shadow-xl hover:shadow-indigo-300">
                     <img
                         src="/assets/portfolio1.png"
                         className="shadow-lg"
