@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id'); // Menggunakan unsignedBigInteger
             $table->foreign('role_id')->references('id')->on('roles'); // Menambahkan foreign key constraint
             $table->text('about')->nullable();
+            $table->text('gambar')->nullable();
             $table->text('institution');
             $table->string('departemen');
             $table->string('postalcode');

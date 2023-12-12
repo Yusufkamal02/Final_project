@@ -2,13 +2,13 @@ import UserLayout from "@/Layouts/UserLayout";
 import React from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
-const Index = ({ users, turu }) => {
+const Index = ({ users, authenticatedUser, userImageUrl }) => {
   //method deletePost
   const deletePost = async (id) => {
     Inertia.delete(`/master/users/${id}`);
   }
 
-  const formattedDate = new Date(turu.created_at).toLocaleDateString('id-ID', {
+  const formattedDate = new Date(authenticatedUser.created_at).toLocaleDateString('id-ID', {
     day: 'numeric',
     month: 'numeric',
     year: 'numeric',
@@ -27,33 +27,29 @@ const Index = ({ users, turu }) => {
             <div className="grid grid-col-12 gap-x-4 w-full">
               <div className="col-span-12 bg-white p-6">
                 <div className="grid grid-cols-12">
-                  <div className="col-span-6">
-                    {/* <img
-                      src={props.turu.avatar ? asset('path_to_avatars/' + props.turu.avatar) : asset('image/avatar.png')}
-                      alt=""
-                    /> */}
-
+                  <div className="col-span-6 text-sm">
+                    <img src={userImageUrl} alt="Profile Belum Tersedia" className="w-2/3 rounded-lg" />
                   </div>
                   <div className="col-span-6">
-                    <p className="text-[16px] mb-1">{turu.firstname} {turu.lastname}</p>
-                    <p className="text-sm text-slate-900/60">{turu.departemen}</p>
-                    <p className="text-sm text-slate-900/60">{turu.city}</p>
+                    <p className="text-[16px] mb-1">{authenticatedUser.firstname} {authenticatedUser.lastname}</p>
+                    <p className="text-sm text-slate-900/60">{authenticatedUser.departemen}</p>
+                    <p className="text-sm text-slate-900/60">{authenticatedUser.city}</p>
                   </div>
                 </div>
 
                 <div className="my-2">
                   <p className="text-sm text-slate-900/60">Email address</p>
-                  <p className="text-sm text-slate-900/80">{turu.email} </p>
+                  <p className="text-sm text-slate-900/80">{authenticatedUser.email} </p>
                 </div>
 
                 <div className="my-2">
                   <p className="text-sm text-slate-900/60">Whatsapp</p>
-                  <p className="text-sm text-slate-900/80">{turu.phonenumber}</p>
+                  <p className="text-sm text-slate-900/80">{authenticatedUser.phonenumber}</p>
                 </div>
 
                 <div className="my-2">
                   <p className="text-sm text-slate-900/60">Instution</p>
-                  <p className="text-sm text-slate-900/80">{turu.institution}</p>
+                  <p className="text-sm text-slate-900/80">{authenticatedUser.institution}</p>
                 </div>
               </div>
               <div className="col-span-12 bg-white p-6 mt-4">
@@ -74,7 +70,7 @@ const Index = ({ users, turu }) => {
             <h5 className="text-xl">General Information</h5>
             <p className="text-[16px] text-slate-900/90 my-2">About Me</p>
             <p className="text-sm text-slate-900/95">
-              {turu.about}
+              {authenticatedUser.about}
             </p>
             {/* <a href="" className="border border-blue-700 py-1 px-3 text-sm bg-blue-700 font-semibold text-white rounded-md mt-2">Edit About</a> */}
             <div className="grid grid-cols-12 my-4">
@@ -82,13 +78,13 @@ const Index = ({ users, turu }) => {
                 <p className="text-sm text-slate-900/60">Join Date</p>
                 <p className="text-sm text-slate-900">{formattedDate}</p>
                 <p className="text-sm text-slate-900/60 mt-2">Birthday</p>
-                <p className="text-sm text-slate-900">{turu.birthday}</p>
+                <p className="text-sm text-slate-900">{authenticatedUser.birthday}</p>
               </div>
               <div className="col-span-6">
                 <p className="text-sm text-slate-900/60">Company/Instution</p>
-                <p className="text-sm text-slate-900">{turu.institution}</p>
+                <p className="text-sm text-slate-900">{authenticatedUser.institution}</p>
                 <p className="text-sm text-slate-900/60 mt-2">Role</p>
-                <p className="text-sm text-slate-900">{turu.role_id == 1 ? 'admin' : 'user'}</p>
+                <p className="text-sm text-slate-900">{authenticatedUser.role_id == 1 ? 'admin' : 'user'}</p>
               </div>
             </div>
 
@@ -107,7 +103,7 @@ const Index = ({ users, turu }) => {
               </div>
               <div className="md:col-span-6 col-span-12">
                 <h5 className="text-xl">Settings</h5>
-                <a href={`/master/users/${turu.id}/edit`} className="border border-blue-700 py-1 px-3 text-sm bg-blue-700 font-semibold text-white rounded-md mt-2">Edit Profile</a>
+                <a href={`/master/users/${authenticatedUser.id}/edit`} className="border border-blue-700 py-1 px-3 text-sm bg-blue-700 font-semibold text-white rounded-md mt-2">Edit Profile</a>
               </div>
             </div>
           </div>
