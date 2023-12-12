@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
 // import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export default function Sidebar() {
     const [enter, setEnter] = useState(false);
@@ -15,6 +16,7 @@ export default function Sidebar() {
             <div className="logo-details">
                 <i className="bx bxl-c-plus-plus icon"></i>
                 <Link href="/">
+                <Link to='/' onClick={toggleEnter}>
                     <div className="logo_name">Eitena</div>
                 </Link>
                 <i className="bx bx-menu" id="btn" onClick={toggleEnter}></i>
@@ -27,14 +29,14 @@ export default function Sidebar() {
                 </li>
 
                 <li>
-                    <Link href='/dashboard'>
+                    <Link to='/dashboard'>
                         <i className="bx bx-grid-alt"></i>
                         <span className="links_name">Dashboard</span>
                         <span className="tooltip">Dashboard</span>
                     </Link>
                 </li>
                 <li>
-                    <Link href='/master/users'>
+                    <a href='/master/users'>
                         <i className="bx bx-user"></i>
                         <span className="links_name">User</span>
                         <span className="tooltip">User</span>
@@ -48,6 +50,17 @@ export default function Sidebar() {
                     </Link>
                     <span className="tooltip">My Profile</span>
                 </li>
+                    </a>
+                </li>
+                <Router>
+                    <li id="profile">
+                        <Link to="/profile">
+                            <i className="bx bx-user"></i>
+                            <span className="links_name">My Profile</span>
+                        </Link>
+                        <span className="tooltip">My Profile</span>
+                    </li>
+                </Router>
                 <li>
                     <Link href='/master/course'>
                         <i className="bx bx-book"></i>
@@ -56,7 +69,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href='/master/catalog'>
+                    <Link to='/master/catalog'>
                         <i className="bx bx-folder"></i>
                         <span className="links_name">Catalog</span>
                         <span className="tooltip">Catalog</span>

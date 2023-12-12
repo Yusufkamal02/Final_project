@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
-
 class UserController extends Controller
 {
     public function index()
@@ -55,34 +54,8 @@ class UserController extends Controller
 
         User::create($request->all());
 
-        // just testing
-        // return dd($request->all());
-
         return Inertia::location(route('users.index'));
     }
-
-    // public function edit(User $user)
-    // {
-    //     $roles = Role::all();
-    //     return inertia('Profile/Custom/Edit', ['user' => $user, 'roles' => $roles]);
-    // }
-
-    // public function update(Request $request, User $user)
-    // {
-    //     $request->validate($this->validationRules($user->id));
-
-    //     // just testing
-    //     // return dd($request->all());
-
-    //     $user->update($request->all());
-
-    //     return Inertia::location(route('users.index'));
-
-    //     // Masih Burique code ini
-    //     // return Inertia::location(route('users.index', [
-    //     //     'success' => 'User updated successfully!'
-    //     // ]));
-    // }
 
     public function edit()
     {
@@ -111,8 +84,6 @@ class UserController extends Controller
             'userImageUrl' => $userImageUrl,
         ]);
     }
-
-
 
     public function update(Request $request)
     {
@@ -149,6 +120,8 @@ class UserController extends Controller
         }
 
         // Redirect ke halaman profil atau halaman lainnya setelah berhasil update
+        $user->update(request()->all());
+
         return Inertia::location(route('users.index'));
     }
     public function destroy(User $user)
