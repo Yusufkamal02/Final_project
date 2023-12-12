@@ -1,11 +1,9 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 
 export default function Sidebar() {
-    const [enter, setEnter] = useState(false);
-
     const [enter, setEnter] = useState(false);
 
     const toggleEnter = () => {
@@ -14,19 +12,6 @@ export default function Sidebar() {
 
     return (
         <div className={'sidebar ' + (enter ? 'open bx-menu-alt-right' : 'bx-menu')}>
-            <div className="logo-details">
-                <i className="bx bxl-c-plus-plus icon"></i>
-                <Link href='/'>
-    const toggleEnter = () => {
-        setEnter((previousState) => !previousState);
-    };
-
-    return (
-        <div
-            className={
-                "sidebar " + (enter ? "open bx-menu-alt-right" : "bx-menu")
-            }
-        >
             <div className="logo-details">
                 <i className="bx bxl-c-plus-plus icon"></i>
                 <Link href="/">
@@ -54,7 +39,8 @@ export default function Sidebar() {
                         <span className="links_name">User</span>
                         <span className="tooltip">User</span>
                     </Link>
-                <Router>
+                </li>
+
                 <li id="profile">
                     <Link to="/profile">
                         <i className="bx bx-user"></i>
@@ -62,13 +48,12 @@ export default function Sidebar() {
                     </Link>
                     <span className="tooltip">My Profile</span>
                 </li>
-                </Router>
                 <li>
-                    <a href="#">
+                    <Link href='/master/course'>
                         <i className="bx bx-book"></i>
                         <span className="links_name">My Course</span>
-                    </a>
-                    <span className="tooltip">My Course</span>
+                        <span className="tooltip">My Course</span>
+                    </Link>
                 </li>
                 <li>
                     <Link href='/master/catalog'>
@@ -76,6 +61,9 @@ export default function Sidebar() {
                         <span className="links_name">Catalog</span>
                         <span className="tooltip">Catalog</span>
                     </Link>
+                </li>
+                <li>
+
                     <a href="#">
                         <i className="bx bx-loader"></i>
                         <span className="links_name">Learning Progress</span>

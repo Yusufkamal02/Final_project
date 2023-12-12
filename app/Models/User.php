@@ -27,7 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'role_id',
         'password',
         'about',
-        'institution'
+        'institution',
+        'gambar'
     ];
 
     /**
@@ -58,5 +59,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function catalogCourses()
+    {
+        return $this->hasMany(CatalogCourse::class);
     }
 }

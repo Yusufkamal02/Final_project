@@ -3,19 +3,36 @@ import UserLayout from '@/Layouts/UserLayout';
 import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
-const Edit = ({ user, roles }) => {
+const Edit = ({ authenticatedUser, roles, userImageUrl, csrf_token }) => {
+  const {
+    firstname,
+    lastname,
+    city,
+    address,
+    email,
+    phonenumber,
+    birthday,
+    organization,
+    institution,
+    postalcode,
+    role_id,
+    gambar,
+  } = authenticatedUser;
+
   const [formData, setFormData] = React.useState({
-    firstname: user.firstname,
-    lastname: user.lastname,
-    city: user.city,
-    address: user.address,
-    email: user.email,
-    phonenumber: user.phonenumber,
-    birthday: user.birthday,
-    organization: user.organization,
-    institution: user.institution,
-    postalcode: user.postalcode,
-    role_id: user.role_id.toString(), // Pastikan role_id dalam bentuk string
+    firstname,
+    lastname,
+    city,
+    address,
+    email,
+    phonenumber,
+    birthday,
+    organization,
+    institution,
+    postalcode,
+    role_id: role_id.toString(),
+    gambar,
+    newImage: null,
   });
 
   const handleChange = (e) => {
@@ -26,31 +43,58 @@ const Edit = ({ user, roles }) => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    // Membuat URL data untuk pratinjau gambar
+    const imageURL = URL.createObjectURL(file);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      newImage: file,
+      imageURL,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Implement logic to update user data
+    // Implementasi logika untuk memperbarui data pengguna
     try {
-      await Inertia.put(`/master/users/${user.id}`, formData);
-      console.log('User data updated successfully');
-      // Redirect or perform any other actions after successful update
+      const formDataWithImage = new FormData();
+      formDataWithImage.append('newImage', formData.newImage);
+
+      // Menambahkan data formulir lainnya ke FormData
+      Object.keys(formData).forEach((key) => {
+        if (key !== 'newImage' && key !== 'imageURL') {
+          formDataWithImage.append(key, formData[key]);
+        }
+      });
+
+      await Inertia.post(`/master/users/${authenticatedUser.id}`, formDataWithImage, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'X-CSRF-TOKEN': csrf_token, // Use the provided csrf_token prop
+          '_method': 'POST'
+        },
+      });
+
+      console.log('Data pengguna berhasil diperbarui');
+      // Mengarahkan atau melakukan tindakan lain setelah pembaruan berhasil
     } catch (error) {
       console.error('Error updating user data:', error);
-      // Handle error, display a message, or perform other actions
+      // Menangani kesalahan, menampilkan pesan, atau melakukan tindakan lainnya
     }
   };
 
   const handleCancel = () => {
-    // Kembali ke halaman sebelumnya
-    window.history.back();
+    // Kembali ke halaman sebelumnya menggunakan Inertia
+    Inertia.visit('/');
   };
-
-
   return (
     <UserLayout>
-      <div>
-        <h1>Edit User</h1>
-        {/* <form onSubmit={handleSubmit} >
+      <h1>Edit User</h1>
+      {/* <form onSubmit={handleSubmit} >
           <label>
             First Name:
             <input
@@ -179,16 +223,41 @@ const Edit = ({ user, roles }) => {
 
           <button type="submit">Update</button>
         </form> */}
-      </div>
-      <div className="w-full my-8">
+
+      <form className="w-full my-8" encType="multipart/form-data" onSubmit={handleSubmit}>
+        <input type="hidden" name="_token" value={csrf_token} />
         <div className="flex justify-between my-3">
           <h1 className="text-2xl font-semibold mb-4">Profile</h1>
         </div>
+
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="md:col-span-4 col-span-12 rounded-sm w-full">
             <div className="grid grid-col-12 gap-x-4 w-full">
-              <div className="col-span-12 bg-white p-6">
-
+              {/* <div className="col-span-12 bg-white p-6">
+                <img src={userImageUrl} alt="Profile Belum Tersedia" className="w-2/3 rounded-lg" />
+                input
+              </div> */}
+              <div className="lg:col-span-6 col-span-12">
+                <div className="mb-4">
+                  <label htmlFor="gambar" className="block text-sm font-medium text-gray-700">
+                    Profile Picture
+                  </label>
+                  {formData.imageURL && (
+                    <img
+                      src={formData.imageURL}
+                      alt="Pratinjau Gambar"
+                      className="mt-2 mb-4 w-32 h-32 object-cover rounded-md border border-gray-300"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    id="gambar"
+                    name="newImage"
+                    onChange={handleImageChange}
+                    accept="image/*" // Hanya menerima file gambar
+                    className="mt-1 p-1 border rounded-md w-full"
+                  />
+                </div>
               </div>
               <div className="col-span-12 bg-white p-6 mt-4">
                 <h5 className="text-xl">Hobbies</h5>
@@ -199,7 +268,7 @@ const Edit = ({ user, roles }) => {
           </div>
           <div className="md:col-span-8 col-span-12 p-3 bg-white rounded-sm w-full">
             <h5 className="text-xl">General Information</h5>
-            <form className="grid grid-cols-12 gap-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-12 gap-4">
               <div className="lg:col-span-6 col-span-12">
                 <div>
                   <div className="mb-4">
@@ -365,10 +434,10 @@ const Edit = ({ user, roles }) => {
                   Cancel
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </UserLayout>
   );
 };

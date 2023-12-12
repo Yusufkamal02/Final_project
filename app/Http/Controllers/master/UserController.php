@@ -15,12 +15,27 @@ class UserController extends Controller
 {
     public function index()
     {
+        // Get all users with their roles
         $users = User::with('role')->get();
 
         // Get currently authenticated user
-        $turu = Auth::user();
+        $authenticatedUser = Auth::user();
 
-        return inertia('Profile/Index', ['users' => $users, 'turu' => $turu]);
+        // Check if user is authenticated
+        if (!$authenticatedUser) {
+            // Handle the case where the user is not authenticated
+            // For example, you can redirect to the login page
+            return redirect()->route('login');
+        }
+
+        // Get the URL for the user's image, or use a default image URL
+        $userImageUrl = $authenticatedUser->gambar ? asset('Profile/' . $authenticatedUser->gambar) : asset('Profile/default.png');
+
+        return inertia('Profile/Index', [
+            'users' => $users,
+            'authenticatedUser' => $authenticatedUser,
+            'userImageUrl' => $userImageUrl,
+        ]);
     }
 
     public function create()
@@ -71,48 +86,71 @@ class UserController extends Controller
 
     public function edit()
     {
-        $user = Auth::user();
+        // Get currently authenticated user
+        $authenticatedUser = Auth::user();
+
+        // Check if user is authenticated
+        if (!$authenticatedUser) {
+            // Handle the case where the user is not authenticated
+            // For example, you can redirect to the login page
+            return redirect()->route('login');
+        }
+
+        // Get all roles
         $roles = Role::get();
 
-        return Inertia::render('Profile/Custom/Edit', ['user' => $user, 'roles' => $roles]);
+        // Get the URL for the user's image, or use a default image URL
+        $userImageUrl = $authenticatedUser->gambar ? asset('Profile/' . $authenticatedUser->gambar) : asset('Profile/default.png');
+
+        // Share the CSRF token with Inertia views
+        Inertia::share('csrf_token', csrf_token());
+
+        return Inertia::render('Profile/Custom/Edit', [
+            'authenticatedUser' => $authenticatedUser,
+            'roles' => $roles,
+            'userImageUrl' => $userImageUrl,
+        ]);
     }
 
-    // public function update(Request $request, User $user)
-    // {
-    // $request->validate($this->validationRules($user->id));
 
-    // // just testing
-    // // return dd($request->all());
-
-    // $user->update($request->all());
-
-    // return Inertia::location(route('users.index'));
-
-    // // Masih Burique code ini
-    // // return Inertia::location(route('users.index', [
-    // //     'success' => 'User updated successfully!'
-    // // ]));
-    // }
 
     public function update(Request $request)
     {
-        // return dd($request->all());
         $user = Auth::user();
 
         // Validasi data yang diterima dari formulir jika diperlukan
-        // request()->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|email|unique:users,email,' . $user->id,
-        //     // tambahkan validasi lainnya sesuai kebutuhan
-        // ]);
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phonenumber' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'organization' => 'required|string|max:255',
+            'institution' => 'required|string|max:255',
+            'about' => 'required|string',
+            'postalcode' => 'required|string|max:255',
+            'role_id' => 'required|exists:roles,id',
+            'newImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image upload
+            // Add other validation rules as needed
+        ]);
 
         // Update data profil pengguna
-        $user->update(request()->all());
-        // return dd($request->all());
+        $user->update($request->except('newImage')); // Update other fields except 'newImage'
+
+        // Handle image upload
+        if ($request->hasFile('newImage')) {
+            // Store the uploaded image in the 'profile' directory within the storage folder
+            $path = $request->file('newImage')->store('profile', 'public');
+
+            // Update the user's 'gambar' field with the stored image path
+            $user->update(['gambar' => $path]);
+        }
+
         // Redirect ke halaman profil atau halaman lainnya setelah berhasil update
         return Inertia::location(route('users.index'));
     }
-
     public function destroy(User $user)
     {
         $user->delete();

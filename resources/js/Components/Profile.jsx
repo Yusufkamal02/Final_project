@@ -1,10 +1,6 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-
-<Router>
-  <Route path="/profile" Component={Profile}/>
-</Router>
+// import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 function Profile() {
   return (
